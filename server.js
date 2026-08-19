@@ -9,29 +9,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const DB_FILE = path.join(__dirname, 'database.json');
 
+let dbData = {
+    users: [],
+    posts: [
+        {id: 1, author: "Alice Martin", avatar: "", content: "Mon premier post"},
+        {id: 2, author: "Jean Dupont", avatar: "https://i.pravatar.cc/150?img=3", content: "Bonjour!"}
+    ],
+    stories: [
+        {id: 1, author: "Alice Martin", avatar: "https//i.pravatar.cc/150?img=5"},
+        {id: 2, author: "Thomas B.", avatar: ""}
+    ],
+    messages: []
+};
 function readDB() {
-    if (!fs.existsSync(DB_FILE)) {
-        const initialDB = {
-            users: [],
-            posts: [
-                { id: 1, author: "Alice Martin", avatar: "", content: "Mon premier jour de vacances ! ☀️ #vacances", likes: 12, comments: ["Super !", "Profite bien !"] },
-                { id: 2, author: "Jean Dupont", avatar: "https://pravatar.cc", content: "Nouveau projet Node.js en cours... #code", likes: 8, comments: ["Bon courage !"] }
-            ],
-            stories: [
-                { id: 1, author: "Alice Martin", avatar: "https://pravatar.cc" },
-                { id: 2, author: "Thomas B.", avatar: "" }
-                
-            ],
-            messages: []
-        };
-        fs.writeFileSync(DB_FILE, JSON.stringify(initialDB, null, 2));
-        return initialDB;
-    }
-    return JSON.parse(fs.readFileSync(DB_FILE, 'utf-8'));
+    return dbData;
 }
 
 function writeDB(data) {
-    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+    dbData = data;
 }
 
 app.post('/api/register', (req, res) => {

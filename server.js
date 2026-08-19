@@ -20,7 +20,7 @@ function readDB() {
             stories: [
                 { id: 1, author: "Alice Martin", avatar: "https://pravatar.cc" },
                 { id: 2, author: "Thomas B.", avatar: "" }
-                { id: 3, author:"Ni Han", avatar:""},
+                
             ],
             messages: []
         };
@@ -105,3 +105,5 @@ app.get('/api/messages', (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Serveur actif sur http://localhost:${PORT}`));
+
+module.exports = app;
